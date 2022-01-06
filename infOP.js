@@ -31,8 +31,10 @@ function infFormat(x,y) {                // Formats an exponent as a regular num
   }
 }
 function normFormat(x) {               // Formats a regular number the same way infOperators (exponents) would be formatted
-  if (x>1000) {
+  if (x>10000) {
     return infFormat(Math.log10(x))
+  } else if (x>100) {
+    return Math.floor(x)
   } else {
     return Math.floor(x*100)/100
   }
