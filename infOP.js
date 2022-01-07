@@ -19,9 +19,9 @@ function infSubtract(x,y) {            // Subtracts two exponents - if y is grea
   }
 }
 function infFormat(x,y) {                // Formats an exponent as a regular number. For example, infFormat(1.301) returns 20 while infFormat(100.602) returns 4e+100
-  if (x>33) {
+  if (x>=33) {
     return Math.floor(100*10**(x%1))/100+"e"+Math.floor(x)
-  } else if (x>3) {                    // Standard notation is used for numbers between 1e3 and 1e33 if Scientific notation is off. To disable this completely, remove lines 24-26. Alternatively you can add an option to disable mixed scientific notation (change line 22 to "if (x>33 || (notation=="Scientific" && x>3)) {")
+  } else if (x>=3) {                    // Standard notation is used for numbers between 1e3 and 1e33 if Scientific notation is off. To disable this completely, remove lines 24-26. Alternatively you can add an option to disable mixed scientific notation (change line 22 to "if (x>33 || (notation=="Scientific" && x>3)) {")
     const endings=["K","M","B","T","Qa","Qt","Sx","Sp","Oc","No"]
     return Math.floor(100*10**(x%3))/100+" "+endings[Math.floor(x/3)-1]
   } else if ((x<1)&&y) {                 // If parameter y is true, 2 decimal digits are displayed if the number is less than 10. If not, the value is always an integer
@@ -31,9 +31,9 @@ function infFormat(x,y) {                // Formats an exponent as a regular num
   }
 }
 function normFormat(x) {               // Formats a regular number the same way infOperators (exponents) would be formatted
-  if (x>10000) {
+  if (x>=10000) {
     return infFormat(Math.log10(x))
-  } else if (x>100) {
+  } else if (x>=100) {
     return Math.floor(x)
   } else {
     return Math.floor(x*100)/100
