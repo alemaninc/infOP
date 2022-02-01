@@ -47,11 +47,18 @@ This function linearly softcaps an ordinary (non-infOP) number. It takes three i
 
 ```power``` is how harsh the softcap is. At high values, the function's output is directly proportional to the ```power+1```th root of ```value```. For example, if you want the effect of an upgrade to be cube rooted after a certain point, you would input ```2``` here.
 
-Unlike many softcapping function, this function (and the other softcapping functions) see a gradual change in derivative (no sudden slowdown) and slowly begin to take effect. Examples:
+Unlike many softcapping function, this function (and the other softcapping functions) see a gradual change in derivative instead of a sudden unexplained slowdown.
+
+#### Examples:
+
 ```NormalLinearSoftcap(5.1,5,1)``` returns ```5.099019513592785```
+
 ```NormalLinearSoftcap(6.1,5,1)``` returns ```6```
+
 ```NormalLinearSoftcap(25,5,1)``` returns ```15```
+
 ```NormalLinearSoftcap(1000,5,0.2)``` returns ```481.03608171937344```
+
 ```NormalLinearSoftcap(1000,5,5)``` returns ```16.287883532425063```
 ### ExponentialLinearSoftcap
 This function linearly softcaps an infOP number. It takes the same three inputs as ```NormalLinearSoftcap``` - ```value```, ```input``` and ```power``` and has the same structure.
