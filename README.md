@@ -3,7 +3,7 @@ A large number library that you can copy-paste directly into your .js file. It i
 
 infOP, similarly to logarithmica.numerus by Aarex Tiaokhiao, stores each number as a logarithm - for example, the number 149600000 is stored as 8.174931594. This allows numbers to go up to 1e1.79e308. The built-in functions make it easy to add, subtract and format these "exponents".
 
-Functions:
+## Fundamental Functions
 ### infAdd
 This function adds two "exponents". For example, ```infAdd(1.743,0.296)``` will return log(10^1.743+10^0.296), which is 1.758245417.
 
@@ -36,8 +36,26 @@ Useful  for removing excess digits.
 This function formats an amount of seconds as a time - for example, ```timeFormat(0.753)``` returns ```0.753 seconds```, ```timeFormat(37)``` returns ```37 seconds``` and ```timeFormat(90123)``` returns ```1 day 1:02:03```.
 
 This is not related to large numbers but is included as part of the code as it is useful if your game includes statistics like many popular incrementals do.
-The twoDigits function formats a one-digit number as 2 digits and has very limited practical a
-### Other functions
+The twoDigits function formats a one-digit number as 2 digits and has very limited practical use.
+## Softcapping
+### NormalLinearSoftcap
+This function linearly softcaps an ordinary (non-infOP) number. It takes three inputs: ```value```, ```start``` and ```power``` in the form ```NormalLinearSoftcap(value,start,power) ```.
+
+```value``` is the value that is getting softcapped. For example, if the base effect of an upgrade is 10x, you would input ```10``` here.
+
+```start``` is the start of the softcap. For example, if you want diminishing returns past 5x, you would input ```5``` here.
+
+```power``` is how harsh the softcap is. At high values, the function's output is directly proportional to the ```power+1```th root of ```value```. For example, if you want the effect of an upgrade to be cube rooted after a certain point, you would input ```2``` here.
+
+Unlike many softcapping function, this function (and the other softcapping functions) see a gradual change in derivative (no sudden slowdown) and slowly begin to take effect. Examples:
+```NormalLinearSoftcap(5.1,5,1)``` returns ```5.099019513592785```
+```NormalLinearSoftcap(6.1,5,1)``` returns ```6```
+```NormalLinearSoftcap(25,5,1)``` returns ```15```
+```NormalLinearSoftcap(1000,5,0.2)``` returns ```481.03608171937344```
+```NormalLinearSoftcap(1000,5,5)``` returns ```16.287883532425063```
+### ExponentialLinearSoftcap
+This function linearly softcaps an infOP number. It takes the same three inputs as ```NormalLinearSoftcap``` - ```value```, ```input``` and ```power``` and has the same structure.
+## Other functions
 Multiplication and division of exponents - This can be done by simply adding or subtracting the exponents. Just as ```(10**7)+(10**4)``` returns ```1e11```, ```7+4``` returns ```11```. Similarly, if you need to raise an infOP number to a power, you can simply type ```7*4``` to get ```28, just as ```(10**7)**4``` returns ```28```.
 
 twoDigits - This function has very few practical applications and only exists to be used as part of timeFormat.
