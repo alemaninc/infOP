@@ -60,4 +60,40 @@ function timeFormat(x) {               // Formats an amount of seconds as a time
     return Math.floor(x/86400)+" days "+Math.floor(x/3600)%24+":"+twoDigits(Math.floor(x/60)%60)+":"+twoDigits(Math.floor(x%60))
   }
 }
+
+function NormalLinearSoftcap(value,start,power) {
+  if (value<start) {
+    return value
+  } else {
+    return start*(1+(power+1)*(value/start-1))**(1/(power+1))
+  }
+}
+function ExponentialLinearSoftcap(value,start,power) {
+  if (value<start) {
+    return value
+  } else {
+    return start+infAdd(0,Math.log10(power+1)+infSubtract(value-start,0))/(power+1)
+  }
+}
+function NormalLogarithmicSoftcap(value,start,power) {
+  if (value<start) {
+    return value
+  } else {
+    return start*(1+Math.log(value/start)*power)**(1/power)
+  }
+}
+function ExponentialLogarithmicSoftcap(value,start,power) {
+  if (value<start) {
+    return value
+  } else {
+    return start+infAdd(0,Math.log(value/start)+power)/power
+  }
+}
+function ConvergentSoftcap(value,start,end) {
+  if (value<start) {
+    return value
+  } else {
+    return end-(end-start)/(1+(value-start)/(end-start))
+  }
+}
 // End of library, start of game
