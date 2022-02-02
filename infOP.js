@@ -76,18 +76,11 @@ function ExponentialLinearSoftcap(value,start,power) {
     return start+infAdd(0,Math.log10(power+1)+infSubtract(value-start,0))/(power+1)
   }
 }
-function NormalLogarithmicSoftcap(value,start,power) {
+function LogarithmicSoftcap(value,start,power) {
   if (value<start) {
     return value
   } else {
     return start*(1+Math.log(value/start)*power)**(1/power)
-  }
-}
-function ExponentialLogarithmicSoftcap(value,start,power) {
-  if (value<start) {
-    return value
-  } else {
-    return start+infAdd(0,Math.log(value/start)+power)/power
   }
 }
 function ConvergentSoftcap(value,start,end) {
