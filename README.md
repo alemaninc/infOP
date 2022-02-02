@@ -117,6 +117,6 @@ Examples:
 ```ConvergentSoftcap(10000,50,100)``` returns ```99.75```
 
 ## Other functions
-Multiplication and division of exponents - This can be done by simply adding or subtracting the exponents. Just as ```(10**7)+(10**4)``` returns ```1e11```, ```7+4``` returns ```11```. Similarly, if you need to raise an infOP number to a power, you can simply type ```7*4``` to get ```28, just as ```(10**7)**4``` returns ```28```.
+Multiplication and division of exponents - This can be done by simply adding or subtracting the exponents. Just as ```(10**7)+(10**4)``` returns ```1e11```, ```7+4``` returns ```11```. Similarly, if you need to raise an infOP number to a power, you can simply type ```7*4``` to get ```28```, just as ```(10**7)**4``` returns ```28```.
 
 twoDigits - This function has very few practical applications and only exists to be used as part of timeFormat.
