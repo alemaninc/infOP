@@ -61,6 +61,7 @@ function timeFormat(x) {               // Formats an amount of seconds as a time
   }
 }
 
+// The following code is for Version 2 and above only.
 function NormalLinearSoftcap(value,start,power) {
   if (value<start) {
     return value
