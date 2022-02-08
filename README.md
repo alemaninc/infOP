@@ -1,11 +1,13 @@
 # infOP
-A large number library that you can copy-paste directly into your .js file. It is easier to use than traditional libraries, is not very laggy (my game Exotic Matter Dimensions uses it and the lag is minimal) and only takes up around 100 lines of code.
+A large number library that you can copy-paste directly into your .js file. It is easier to use than traditional libraries, is not very laggy (my game Exotic Matter Dimensions uses it and the lag is minimal) and only takes up around 100 lines of code (60 if you are using Fundamental).
 
 infOP, similarly to logarithmica.numerus by Aarex Tiaokhiao, stores each number as a logarithm - for example, the number 149600000 is stored as 8.174931594. This allows numbers to go up to 1e1.79e308. The built-in functions make it easy to add, subtract and format these "exponents".
 
-infOP is split into "versions", each version having more functions than the last. Version 1 has only the necessary functions, whereas higher versions have more advanced functions. It is recommended to always use the highest version, but if your device is laggy or you want a small library then lower versions may be better for you.
+infOP is split into Fundamental and Advanced versions. The Fundamental version only includes necessary functions and is easier to use, whereas the Advanced version includes a lot more functions, but is a lot longer and the documentation is harder to navigate.
 
-## Version 1+
+In this documentation and function names, the prefix ```norm``` indicates an ordinary number (```5``` means ```5```) and the prefix ```inf``` indicates a logarithm variable (```5``` means ```100000```)
+
+## Fundamental Functions
 ### infAdd
 This function adds two "exponents". For example, ```infAdd(1.743,0.296)``` will return log(10^1.743+10^0.296), which is 1.758245417.
 
@@ -39,9 +41,9 @@ This function formats an amount of seconds as a time - for example, ```timeForma
 
 This is not related to large numbers but is included as part of the code as it is useful if your game includes statistics like many popular incrementals do.
 The twoDigits function formats a one-digit number as 2 digits and has very limited practical use.
-## Version 2+
-### NormalLinearSoftcap
-This function linearly softcaps an ordinary (non-infOP) number. It takes three inputs: ```value```, ```start``` and ```power``` in the form ```NormalLinearSoftcap(value,start,power) ```.
+## Advanced Functions
+### normLinearSoftcap
+This function linearly softcaps an ordinary (non-infOP) number. It takes three inputs: ```value```, ```start``` and ```power``` in the form ```normLinearSoftcap(value,start,power) ```.
 
 ```value``` is the value that is getting softcapped. For example, if the base effect of an upgrade is 10x, you would input ```10``` here.
 
@@ -53,36 +55,38 @@ Unlike many softcapping functions, this function (and the other softcapping func
 
 Examples:
 
-```NormalLinearSoftcap(5.1,5,1)``` returns ```5.099019513592785```
+```normLinearSoftcap(5.1,5,1)``` returns ```5.099019513592785```
 
-```NormalLinearSoftcap(6.1,5,1)``` returns ```6```
+```normLinearSoftcap(6.1,5,1)``` returns ```6```
 
-```NormalLinearSoftcap(25,5,1)``` returns ```15```
+```normLinearSoftcap(25,5,1)``` returns ```15```
 
-```NormalLinearSoftcap(1000,5,0.2)``` returns ```481.03608171937344```
+```normLinearSoftcap(1000,5,0.2)``` returns ```481.03608171937344```
 
-```NormalLinearSoftcap(1000,5,5)``` returns ```16.287883532425063```
+```normLinearSoftcap(1000,5,5)``` returns ```16.287883532425063```
 
 Alternatively, ```power``` can be negative (for the opposite effect - a number increases faster past a certain value). **```power``` must never be less than or equal to ```-1```.**
 
 Examples:
 
-```NormalLinearSoftcap(6,5,-0.5)``` returns ```6.05```
+```normLinearSoftcap(6,5,-0.5)``` returns ```6.05```
 
-```NormalLinearSoftcap(30,10,-0.5)``` returns ```40```
+```normLinearSoftcap(30,10,-0.5)``` returns ```40```
 
-```NormalLinearSoftcap(100,10,-0.99)``` returns ```55290.40791825879```
+```normLinearSoftcap(100,10,-0.99)``` returns ```55290.40791825879```
 
-### ExponentialLinearSoftcap
-This function linearly softcaps an infOP number. It takes the same three inputs as ```NormalLinearSoftcap``` - ```value```, ```start``` and ```power``` and has the same structure. However, ```value``` and ```start``` are infOP exponents and so is the output. ```power``` is still a regular number and can still go below 0 (though not below -1).
+It is recommended to use the ```Scaling``` functions for this unless one of your upgrades weakens a softcap beyond 100%.
+
+### infLinearSoftcap
+This function linearly softcaps an infOP number. It takes the same three inputs as ```normLinearSoftcap``` - ```value```, ```start``` and ```power``` and has the same structure. However, ```value``` and ```start``` are infOP exponents and so is the output. ```power``` is still a regular number and can still go below 0 (though not below -1).
 
 Examples:
 
-```ExponentialLinearSoftcap(0.78532983501,0.69897000433,1)``` returns ```0.7781512503820742```   (```10**0.78532983501=6.1, 10**0.69897000433=5, 10**0.7781512503820742=6)
+```infLinearSoftcap(0.78532983501,0.69897000433,1)``` returns ```0.7781512503820742```   (```10**0.78532983501=6.1, 10**0.69897000433=5, 10**0.7781512503820742=6)
 
-```ExponentialLinearSoftcap(10000,10,1)``` returns ```5005.150514997832```
+```infLinearSoftcap(10000,10,1)``` returns ```5005.150514997832```
 
-```ExponentialLinearSoftcap(2,1,-0.5)``` returns ```2.4807253789884878```
+```infLinearSoftcap(2,1,-0.5)``` returns ```2.4807253789884878```
 
 ### LogarithmicSoftcap
 This function logarithmically softcaps an ordinary (non-infOP) number. It still takes three inputs: ```value```, ```start``` and ```power``` in the form ```LogarithmicSoftcap(value,start,power)```.
@@ -115,6 +119,22 @@ Examples:
 ```ConvergentSoftcap(100,50,100)``` returns ```75```
 
 ```ConvergentSoftcap(10000,50,100)``` returns ```99.75```
+
+### normLinearScaling
+### infLinearScaling
+### normSemiexpScaling
+### infSemiexpScaling
+### ExponentialScaling
+### SuperexpScaling
+
+### infFloor
+This function floors an infOP number. It takes one input, which is ```x``` - this is the value getting floored.
+
+Examples:
+
+```infFloor(0.5)``` returns ```0.47712125471966244``` (input 3.162, output 3)
+
+```infFloor(3.1415926)``` returns ```3.1414497734004674``` (input 1385.4555604086302, output 1385)
 
 ## Other functions
 Multiplication and division of exponents - This can be done by simply adding or subtracting the exponents. Just as ```(10**7)+(10**4)``` returns ```1e11```, ```7+4``` returns ```11```. Similarly, if you need to raise an infOP number to a power, you can simply type ```7*4``` to get ```28```, just as ```(10**7)**4``` returns ```28```.
