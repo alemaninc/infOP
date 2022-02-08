@@ -1,5 +1,6 @@
 body {
   color: #00ff00;
+  background-image: radial-gradi
   font-family: "Arial"
 }
 .navigation {      /* Credit to W3Schools for this class */
@@ -23,11 +24,12 @@ body {
 .buttonon {
   width: 20vw;
   font-size: 30px;
-  background-color: #666666;
+  background-color: linear-gradient(90, #999999, #666666, ...);
   color: #ffffff;
 }
 .main {            /* Credit to W3Schools for this class */
   margin-left: 20vw;
   font-size: 14px;
   padding: 0px 10px;
+  background-image: radial-gradient(circle, #330066, #190033)
 }
