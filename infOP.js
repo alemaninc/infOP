@@ -61,15 +61,15 @@ function timeFormat(x) {               // Formats an amount of seconds as a time
   }
 }
 
-// The following code is for Version 2 and above only.
-function NormalLinearSoftcap(value,start,power) {
+// The following code is for Advanced infOP only.
+function normLinearSoftcap(value,start,power) {
   if (value<start) {
     return value
   } else {
     return start*(1+(power+1)*(value/start-1))**(1/(power+1))
   }
 }
-function ExponentialLinearSoftcap(value,start,power) {
+function infLinearSoftcap(value,start,power) {
   if (value<start) {
     return value
   } else {
@@ -90,4 +90,13 @@ function ConvergentSoftcap(value,start,end) {
     return end-(end-start)/(1+(value-start)/(end-start))
   }
 }
-// End of library, start of game
+function infFloor(x) {
+  if (x>16) {
+    return x
+  } else if (x<0) {
+    return -100       // Equivalent to 0
+  } else {
+    return Math.log10(Math.floor(10**x))
+  }
+}
+// End of infOP
