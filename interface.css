@@ -28,7 +28,8 @@ body {
   color: #ffffff;
 }
 .main {            /* Credit to W3Schools for this class */
-  width: 80vw;
+  margin-left: 20vw;
+  width: 79vw;
   height: 100vh;
   font-size: 14px;
   background-color: transparent
