@@ -28,7 +28,10 @@ body {
 }
 .main {            /* Credit to W3Schools for this class */
   margin-left: 20vw;
+  margin-right: 100vw;
+  margin-top: 0vh;
+  margin-bottom: 100vh;
+  height: 100vh;
   font-size: 14px;
-  padding: 0px 10px;
   background-image: radial-gradient(circle, #330066, #190033)
 }
