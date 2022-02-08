@@ -1,0 +1,28 @@
+.navigation {      /* Credit to W3Schools for this class */
+  height: 100vh;
+  width: 20vw;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #333333;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+.buttonoff {
+  width: 20vw;
+  font-size: 30px;
+  background-color: #333333;
+  color: #666666;
+}
+.buttonon {
+  width: 20vw;
+  font-size: 30px;
+  background-color: #666666;
+  color: #ffffff;
+}
+.main {            /* Credit to W3Schools for this class */
+  margin-left: 160px;
+  font-size: 28px;
+  padding: 0px 10px;
+}
