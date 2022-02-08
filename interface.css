@@ -12,6 +12,7 @@ body {
   background-color: #333333;
   overflow-x: hidden;
   padding-top: 20px;
+  font-size: 10px
 }
 .buttonoff {
   width: 20vw;
