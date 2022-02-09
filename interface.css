@@ -20,12 +20,14 @@ body {
   font-size: 30px;
   background-color: #333333;
   color: #666666;
+  border: transparent
 }
 .buttonon {
   width: 20vw;
   font-size: 30px;
   background-color: linear-gradient(90, #999999, #666666, ...);
   color: #ffffff;
+  border: transparent
 }
 .main {            /* Credit to W3Schools for this class */
   margin-left: 20vw;
