@@ -25,7 +25,7 @@ body {
 .buttonon {
   width: 20vw;
   font-size: 30px;
-  background-color: linear-gradient(90, #999999, #666666, ...);
+  background-color: linear-gradient(90, #999999, #666666);
   color: #ffffff;
   border: transparent
 }
