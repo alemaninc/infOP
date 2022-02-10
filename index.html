@@ -13,14 +13,41 @@
     </div>
     <div class="main" id="Introduction">
       <p>A large number library that you can copy-paste directly into your .js file. It is easier to use than traditional libraries, is not very laggy (my game Exotic Matter Dimensions uses it and the lag is minimal) and only takes up around 100 lines of code (60 if you are using Fundamental).</p>
-      <p>infOP, similarly to logarithmica.numerus by Aarex Tiaokhiao, stores each number as a logarithm - for example, the number <tt>149600000</tt> is stored as <tt>8.174931594</tt>. This allows numbers to go up to 1e1.79e308. The built-in functions make it easy to add, subtract and format these "exponents".</p>
-      <p>infOP is split into Fundamental and Advanced versions. The Fundamental version only includes necessary functions and is easier to use, whereas the Advanced version includes a lot more functions, but is a lot longer and the documentation is harder to navigate.<br></p>
-      <p>In this documentation and function names, the prefix <tt>norm</tt> indicates an ordinary number (<tt>5</tt> means <tt>5</tt>) and the prefix <tt>inf</tt> indicates a logarithm variable (<tt>5</tt> means <tt>100000</tt>)</p>
+      <p>infOP, similarly to logarithmica.numerus by Aarex Tiaokhiao, stores each number as a logarithm - for example, the number <tt>149600000</tt> is stored as <tt>8.174931594</tt> (Such variables are referred to as infNumbers in the code). This allows numbers to go up to 1e1.79e308. The built-in functions make it easy to add, subtract and format these infNumbers.</p>
+      <p>infOP is split into Fundamental and Advanced versions. The Fundamental version only includes only the Fundamental Functions and is more compact (as well as being easier to use), whereas the Advanced version includes all functions documented here but is a lot longer.</p>
+      <p>In this documentation and function names, the prefix <tt>norm</tt> indicates an ordinary number input (<tt>5</tt> means <tt>5</tt>) and the prefix <tt>inf</tt> indicates an infNumber input (<tt>5</tt> means <tt>100000</tt>)</p>
     </div>
     <div class="main" id="Fundamental Functions">
-      <h1>infAdd</h1>
-      <p>This function adds two "exponents". For example, <tt>infAdd(1.743,0.296)</tt> will return <tt>log(10^1.743+10^0.296)</tt>, which is <tt>1.758245417</tt>.</p>
-      <p>Syntax: <tt>infAdd(x,y)</tt> where <tt>x</tt> and <tt>y</tt> are the exponents you want to add</p>
+      <h2>infAdd</h2>
+      <p>This function adds two infNumbers. For example, <tt>infAdd(1.743,0.296)</tt> will return <tt>log(10^1.743+10^0.296)</tt>, which is <tt>1.758245417</tt>.</p>
+      <p>Syntax: <tt>infAdd(x,y)</tt> where <tt>x</tt> and <tt>y</tt> are the infNumbers you want to add</p>
+      <h2>infSubtract</h2>
+      <p>This function subtracts two infNumbers. For example, <tt>infSubtract(1.758,0.296)</tt> will return <tt>log(10^1.758-10^0.296)</tt>, which is <tt>1.742745812</tt>.</p>
+      <p>Syntax: <tt>infSubtract(x,y)</tt> where <tt>y</tt> is the infNumber you want to subtract from <tt>x</tt>.</p>
+      <h2>infFormat</h2>
+      <p>This function formats an infNumber as an ordinary number. For example, <tt>infFormat(33.374,false)</tt> will return <tt>2.36e33</tt>, <tt>infFormat(23.456,false)</tt> will return <tt>287.57 Sx</tt> and <tt>inf(1.4,false)</tt> will return <tt>25</tt>.</p>
+      <p>Syntax: <tt>infFormat(x,decimal)</tt> where <tt>x</tt> is the number you want to format and <tt>decimal</tt> is a boolean - if <tt>decimal</tt> is enabled, numbers below 10 will retain 2 decimal points instead of being rounded down. So:<br>
+      <tt>infFormat(0.75,true)</tt> returns <tt>5.62</tt> (helpful for when you want accurate values, for example upgrade effects)<br>
+      <tt>infFormat(0.75,false)</tt> returns <tt>5</tt> (helpful for when you want integer values, for example styling currency)<br>
+      <tt>infFormat(1.3,true)</tt> returns <tt>19</tt> (decimal only rounds numbers below 10)</p>
+      <p>NOTE: infFormat uses mixed scientific notation by default, meaning numbers between 1e3 and 1e33 are formatted with Antimatter Dimensions standard notation by default. To change this, find the <tt>Mixed scientific</tt> variable in the code for the language you are using and replace it with <tt>Scientific</tt> or the notation you want. Supported notations are:</p>
+      <ul>
+        <li>Mixed scientific</li>
+        <li>Scientific</li>
+      </ul>
+      <p>NOTE 2: This version of infOP does not support formatting of very large numbers (> 10^1M), this feature will come in the future.</p>
+      <h2>normFormat</h2>
+      <p>This function is identical to infFormat, but treats the input as if it were a normal number. So <tt>normFormat(2**256)</tt> returns <tt>1.15e77</tt> instead of <tt>e1.15e77</tt>. normFormat only starts using mixed scientific notation past 10000 instead of 1000, so <tt>normFormat(1753)</tt> still returns <tt>1753</tt>.</p>
+      <p>Also, numbers below 100 are always rounded to 2 decimal digits, so <tt>normFormat(31.4159265)</tt> returns <tt>31.41</tt> instead of <tt>31</tt>. Useful for removing excess digits.</p>
+      <h2>timeFormat</h2>
+      <p>This function formats an amount of seconds as a time - for example, <tt>timeFormat(0.753)</tt> returns <tt>0.753 seconds</tt>, <tt>timeFormat(37)</tt> returns <tt>37 seconds</tt> and <tt>timeFormat(90123)</tt> returns <tt>1 day 1:02:03</tt>.</p>
+      <p>This is not related to large numbers but is included as part of the code as it is useful if your game includes statistics like many popular incrementals do.</p>
+      <p>The twoDigits function formats a one-digit number as 2 digits and has very limited practical use.</p>
+      <h3>infMultiply / infDivide / infExponent</h3>
+      <p>These functions do not exist as they can easily be replicated with the basic operators.</p>
+      <p><span class="h7">infMultiply:</span> <tt>infMultiply(x,y) = x+y</tt>. As <tt>1e7*1e4=1e11</tt>, <tt>7+4=11</tt>.</p>
+      <p><span class="h7">infDivide:</span> <tt>infDivide(x,y) = x-y</tt>. As <tt>1e9/1e3=1e6</tt>, <tt>9-3=6</tt>.</p>
+      <p><span class="h7">infExponent:</span> <tt>infExponent(x,y) = x*y</tt> assuming <tt>x</tt> is an infNumber and <tt>y</tt> is a regular number. As <tt>1e7**4=28</tt>, <tt>7*4=28</tt>.</p>
     </div>
   </body>
 </html>
