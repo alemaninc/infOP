@@ -1,10 +1,10 @@
-var tabOpen="Introduction"
-function openTab(name) {
-  tabOpen=name
+var tabOpen=1
+function openTab(x) {
+  tabOpen=x
 }
 window.setInterval(function(){
-  document.getElementById("buttonIntroduction").className = (tabOpen=="Introduction") ? "buttonon" : "buttonoff";
-  document.getElementById("Introduction").style.display = (tabOpen=="Introduction") ? "inline-block" : "none";
-  document.getElementById("buttonFundamentalFunctions").className = (tabOpen=="Fundamental Functions") ? "buttonon" : "buttonoff";
-  document.getElementById("Fundamental Functions").style.display = (tabOpen=="Fundamental Functions") ? "inline-block" : "none";
+  document.getElementById("buttonIntroduction").className = (tabOpen==1) ? "buttonon" : "buttonoff";
+  document.getElementById("Introduction").style.display = (tabOpen==1) ? "inline-block" : "none";
+  document.getElementById("buttonFundamentalFunctions").className = (tabOpen==2) ? "buttonon" : "buttonoff";
+  document.getElementById("Fundamental Functions").style.display = (tabOpen==2) ? "inline-block" : "none";
 }, 50);
