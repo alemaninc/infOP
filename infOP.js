@@ -63,40 +63,36 @@ function timeFormat(x) {               // Formats an amount of seconds as a time
 
 // The following code is for Advanced infOP only.
 function normLinearSoftcap(value,start,power) {
-  if (value<start) {
-    return value
-  } else {
-    return start*(1+(power+1)*(value/start-1))**(1/(power+1))
-  }
+  return (value<start) ? value : start*(1+(power+1)*(value/start-1))**(1/(power+1))
 }
 function infLinearSoftcap(value,start,power) {
-  if (value<start) {
-    return value
-  } else {
-    return start+infAdd(0,Math.log10(power+1)+infSubtract(value-start,0))/(power+1)
-  }
+  return (value<start) ? value : start+infAdd(0,Math.log10(power+1)+infSubtract(value-start,0))/(power+1)
 }
 function LogarithmicSoftcap(value,start,power) {
-  if (value<start) {
-    return value
-  } else {
-    return start*(1+Math.log(value/start)*power)**(1/power)
-  }
+  return (value<start) ? value : start*(1+Math.log(value/start)*power)**(1/power)
 }
 function ConvergentSoftcap(value,start,end) {
-  if (value<start) {
-    return value
-  } else {
-    return end-(end-start)/(1+(value-start)/(end-start))
-  }
+  return (value<start) ? value : end-(end-start)/(1+(value-start)/(end-start))
 }
-function infFloor(x) {
-  if (x>16) {
-    return x
-  } else if (x<0) {
-    return -100       // Equivalent to 0
-  } else {
-    return Math.log10(Math.floor(10**x))
-  }
+function normLinearScaling(value,start,power) {
+  return (value<start) ? value : start/(power+1)*(power+(value/start)**(power+1))
+}
+function infLinearScaling(value,start,power) {
+  return (value<start) ? value : start-Math.log10(power+1)+infAdd(Math.log10(power),(value-start)*(power+1))
+}
+function normSemiexpScaling(value,start,power) {
+  return (value<start) ? value : 10**(Math.log10(start)*(Math.log(value)/Math.log(start))**(power+1)-Math.log10(power+1))+start*(1-1/(power+1))
+}
+function infSemiexpScaling(value,start,power) {
+  return (value<start) ? value : infAdd(start*(value/start)**(power+1)-Math.log10(power+1),start*(1-1/(power+1)))
+}
+function ExponentialScaling(value,start) {
+  return (value<start) ? value : start*Math.exp(value/start-1)
+}
+function SuperexpScaling(value,start) {
+  return (value<start) ? value : start*Math.exp(Math.exp(value/start-1)-1)
+}
+function divergentScaling(value,start,end) {
+  return (value>=end) ? 1e300 : ((value<start) ? value : start+(end-start)*((end-start)/(end-value)-1))
 }
 // End of infOP
