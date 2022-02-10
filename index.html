@@ -18,13 +18,13 @@
       <p>In this documentation and function names, the prefix <tt>norm</tt> indicates an ordinary number input (<tt>5</tt> means <tt>5</tt>) and the prefix <tt>inf</tt> indicates an infNumber input (<tt>5</tt> means <tt>100000</tt>)</p>
     </div>
     <div class="main" id="Fundamental Functions">
-      <h2>infAdd</h2>
+      <h1>infAdd</h1>
       <p>This function adds two infNumbers. For example, <tt>infAdd(1.743,0.296)</tt> will return <tt>log(10^1.743+10^0.296)</tt>, which is <tt>1.758245417</tt>.</p>
       <p>Syntax: <tt>infAdd(x,y)</tt> where <tt>x</tt> and <tt>y</tt> are the infNumbers you want to add</p>
-      <h2>infSubtract</h2>
+      <h1>infSubtract</h1>
       <p>This function subtracts two infNumbers. For example, <tt>infSubtract(1.758,0.296)</tt> will return <tt>log(10^1.758-10^0.296)</tt>, which is <tt>1.742745812</tt>.</p>
       <p>Syntax: <tt>infSubtract(x,y)</tt> where <tt>y</tt> is the infNumber you want to subtract from <tt>x</tt>.</p>
-      <h2>infFormat</h2>
+      <h1>infFormat</h1>
       <p>This function formats an infNumber as an ordinary number. For example, <tt>infFormat(33.374,false)</tt> will return <tt>2.36e33</tt>, <tt>infFormat(23.456,false)</tt> will return <tt>287.57 Sx</tt> and <tt>inf(1.4,false)</tt> will return <tt>25</tt>.</p>
       <p>Syntax: <tt>infFormat(x,decimal)</tt> where <tt>x</tt> is the number you want to format and <tt>decimal</tt> is a boolean - if <tt>decimal</tt> is enabled, numbers below 10 will retain 2 decimal points instead of being rounded down. So:<br>
       <tt>infFormat(0.75,true)</tt> returns <tt>5.62</tt> (helpful for when you want accurate values, for example upgrade effects)<br>
@@ -36,14 +36,14 @@
         <li>Scientific</li>
       </ul>
       <p>NOTE 2: This version of infOP does not support formatting of very large numbers (> 10^1M), this feature will come in the future.</p>
-      <h2>normFormat</h2>
+      <h1>normFormat</h1>
       <p>This function is identical to infFormat, but treats the input as if it were a normal number. So <tt>normFormat(2**256)</tt> returns <tt>1.15e77</tt> instead of <tt>e1.15e77</tt>. normFormat only starts using mixed scientific notation past 10000 instead of 1000, so <tt>normFormat(1753)</tt> still returns <tt>1753</tt>.</p>
       <p>Also, numbers below 100 are always rounded to 2 decimal digits, so <tt>normFormat(31.4159265)</tt> returns <tt>31.41</tt> instead of <tt>31</tt>. Useful for removing excess digits.</p>
-      <h2>timeFormat</h2>
+      <h1>timeFormat</h1>
       <p>This function formats an amount of seconds as a time - for example, <tt>timeFormat(0.753)</tt> returns <tt>0.753 seconds</tt>, <tt>timeFormat(37)</tt> returns <tt>37 seconds</tt> and <tt>timeFormat(90123)</tt> returns <tt>1 day 1:02:03</tt>.</p>
       <p>This is not related to large numbers but is included as part of the code as it is useful if your game includes statistics like many popular incrementals do.</p>
       <p>The twoDigits function formats a one-digit number as 2 digits and has very limited practical use.</p>
-      <h3>infMultiply / infDivide / infExponent</h3>
+      <h2>infMultiply / infDivide / infExponent</h2>
       <p>These functions do not exist as they can easily be replicated with the basic operators.</p>
       <p><span class="h7">infMultiply:</span> <tt>infMultiply(x,y) = x+y</tt>. As <tt>1e7*1e4=1e11</tt>, <tt>7+4=11</tt>.</p>
       <p><span class="h7">infDivide:</span> <tt>infDivide(x,y) = x-y</tt>. As <tt>1e9/1e3=1e6</tt>, <tt>9-3=6</tt>.</p>
