@@ -20,6 +20,7 @@
       <p>infOP, similarly to logarithmica.numerus by Aarex Tiaokhiao, stores each number as a logarithm - for example, the number <tt>149600000</tt> is stored as <tt>8.174931594</tt> (Such variables are referred to as infNumbers in the code). This allows numbers to go up to 1e1.79e308. The built-in functions make it easy to add, subtract and format these infNumbers.</p>
       <p>infOP is split into Fundamental and Advanced versions. The Fundamental version only includes only the Fundamental Functions and is more compact (as well as being easier to use), whereas the Advanced version includes all functions documented here but is a lot longer.</p>
       <p>In this documentation and function names, the prefix <tt>norm</tt> indicates an ordinary number input (<tt>5</tt> means <tt>5</tt>) and the prefix <tt>inf</tt> indicates an infNumber input (<tt>5</tt> means <tt>100000</tt>)</p>
+      <a href="https://github.com/alemaninc/infOP/blob/main/infOP.js">infOP Javascript</a>
     </div>
     <div class="main" id="Fundamental Functions">
       <h1>infAdd</h1>
@@ -51,11 +52,11 @@
       <p>These functions do not exist as they can easily be replicated with the basic operators.</p>
       <p><span class="h7">infMultiply:</span> <tt>infMultiply(x,y) = x+y</tt>. As <tt>1e7*1e4=1e11</tt>, <tt>7+4=11</tt>.</p>
       <p><span class="h7">infDivide:</span> <tt>infDivide(x,y) = x-y</tt>. As <tt>1e9/1e3=1e6</tt>, <tt>9-3=6</tt>.</p>
-      <p><span class="h7">infExponent:</span> <tt>infExponent(x,y) = x*y</tt> assuming <tt>x</tt> is an infNumber and <tt>y</tt> is a regular number. As <tt>1e7**4=28</tt>, <tt>7*4=28</tt>.</p>
+      <p><span class="h7">infExponent:</span> <tt>infExponent(x,y) = x*y</tt> assuming <tt>x</tt> is an infNumber and <tt>y</tt> is a regular number. As <tt>1e7^4=28</tt>, <tt>7*4=28</tt>.</p>
     </div>
     <div class="main" id="Softcaps">
       <h1>normLinearSoftcap</h1>
-      <p>This function linearly softcaps an ordinary (non-infOP) number. It takes three inputs: <tt>value</tt>, <tt>start</tt> and <tt>power</tt> in the form <tt>normLinearSoftcap(value,start,power)</tt>.<br>
+      <p>This function linearly softcaps an ordinary number. It takes three inputs: <tt>value</tt>, <tt>start</tt> and <tt>power</tt> in the form <tt>normLinearSoftcap(value,start,power)</tt>.<br>
       <tt>value</tt> is the value that is getting softcapped. For example, if the base effect of an upgrade is 10x, you would input 10 here.<br>
       <tt>start</tt> is the start of the softcap. For example, if you want diminishing returns past 5x, you would input 5 here.<br>
       <tt>power</tt> is how harsh the softcap is. At high values, the function's output is directly proportional to the <tt>power+1</tt>th root of value. For example, if you want the effect of an upgrade to be cube rooted after a certain point, you would input <tt>2</tt> here.</p>
@@ -73,16 +74,16 @@
       <tt>normLinearSoftcap(100,10,-0.99)</tt> returns <tt>55290.40791825879</tt></p>
       <p>It is recommended to use the Scaling functions for this unless one of your upgrades weakens a softcap to the point of reversing it.</p>
       <h1>infLinearSoftcap</h1>
-      <p>This function linearly softcaps an infOP number. It takes the same three inputs as normLinearSoftcap - value, start and power and has the same structure. However, value and start are infOP exponents and so is the output. power is still a regular number and can still go below 0 (though not below -1).</p>
+      <p>This function linearly softcaps an infNumber. It takes the same three inputs as normLinearSoftcap - value, start and power and has the same structure. However, value and start are infOP exponents and so is the output. power is still a regular number and can still go below 0 (though not below -1).</p>
       <p>Examples:<br>
-      <tt>infLinearSoftcap(0.78532983501,0.69897000433,1)</tt> returns <tt>0.7781512503820742</tt> (<tt>10**0.78532983501=6.1</tt>, <tt>10**0.69897000433=5</tt>, <tt>10**0.7781512503820742=6</tt>)<br>
+      <tt>infLinearSoftcap(0.78532983501,0.69897000433,1)</tt> returns <tt>0.7781512503820742</tt> (<tt>10^0.78532983501=6.1</tt>, <tt>10^0.69897000433=5</tt>, <tt>10^0.7781512503820742=6</tt>)<br>
       <tt>infLinearSoftcap(10000,10,1)</tt> returns <tt>5005.150514997832</tt><br>
       <tt>infLinearSoftcap(2,1,-0.5)</tt> returns <tt>2.4807253789884878</tt></p>
       <h1>LogarithmicSoftcap</h1>
-      <p>This function logarithmically softcaps an ordinary (non-infOP) number. It still takes three inputs: <tt>value</tt>, <tt>start</tt> and <tt>power</tt> in the form <tt>LogarithmicSoftcap(value,start,power)</tt>.<br>
+      <p>This function logarithmically softcaps a number. It still takes three inputs: <tt>value</tt>, <tt>start</tt> and <tt>power</tt> in the form <tt>LogarithmicSoftcap(value,start,power)</tt>.<br>
       <tt>value</tt> is the value that is getting softcapped. For example, if the base effect of an upgrade is 10x, you would input 10 here.<br>
       <tt>start</tt> is the start of the softcap. For example, if you want diminishing returns past 5x, you would input 5 here.<br>
-      <tt>power</tt> is how harsh the softcap is. At high values, the function's output is directly proportional to <tt>ln(value)**(1/power)</tt>. For example, if you want a weak softcap, you would input a number such as <tt>0.02</tt> and get <tt>ln(value)**50</tt> at very high values.</p>
+      <tt>power</tt> is how harsh the softcap is. At high values, the function's output is directly proportional to <tt>ln(value)^(1/power)</tt>. For example, if you want a weak softcap, you would input a number such as <tt>0.02</tt> and get <tt>ln(value)^50</tt> at very high values.</p>
       <p>power cannot be negative for this function. For scaling purposes, use the Scaling functions or make your own.</p>
       <p>Examples:<br>
       <tt>LogarithmicSoftcap(11,10,1)</tt> returns <tt>10.95310179804325</tt><br>
@@ -90,7 +91,7 @@
       <tt>LogarithmicSoftcap(1e100,10,10)</tt> returns <tt>21.66726703913011</tt></p>
       <p>Note: This function has no equivalent for exponents as due to the laws of logarithms it would have the same outputs as this version.</p>
       <h1>ConvergentSoftcap</h1>
-      <p>This function is different from the other softcapping functions. It takes three inputs: value, start and end, structured as ConvergentSoftcap(value,start,end). Once value exceeds start, it will approach but never reach end. Useful for percentage-based upgrades (to never exceed 100%) or sometimes for other purposes.</p>
+      <p>This function is different from the other softcapping functions. It takes three inputs: <tt>value</tt>, <tt>start</tt> and <tt>end</tt>, structured as <tt>ConvergentSoftcap(value,start,end)</tt>. Once value exceeds start, it will approach but never reach end. Useful for percentage-based upgrades (to never exceed 100%) or sometimes for other purposes.</p>
       <p>Examples:<br>
       <tt>ConvergentSoftcap(80,75,100)</tt> returns <tt>79.16666666666667</tt><br>
       <tt>ConvergentSoftcap(100,50,100)</tt> returns <tt>75</tt><br>
@@ -98,11 +99,39 @@
     </div>
     <div class="main" id="Scalings">
       <h1>normLinearScaling</h1>
+      <p>This function linearly scales an ordinary number, meaning it increases faster past a certain value. It takes three inputs: <tt>value</tt>, <tt>start</tt> and <tt>power</tt>, structured as <tt>normLinearSoftcap(value,start,power)</tt>.
+      <p>Examples:<br>
+      <tt>normLinearScaling(15,5,1)</tt> returns <tt>25</tt><br>
+      <tt>normLinearScaling(9,8,2)</tt> returns <tt>9.130208333333332</tt></p>
+      <p>At high values, the output of this function is directly proportional to <tt>value^(power+1)</tt></p>
       <h1>infLinearScaling</h1>
+      <p>This function linearly scales an infNumber. It takes the same three inputs as normLinearScaling.</p>
+      <p>Examples:<br>
+      <tt>infLinearScaling(40,8,2)</tt> returns <tt>103.52287874528034</tt><br>
+      <tt>infLinearScaling(1.2,0.7,1)</tt> returns <tt>1.4403626894942436</tt></p>
       <h1>normSemiexpScaling</h1>
+      <p>This function semi-exponentially scales an ordinary number. Semi-exponential scaling is faster than linear scaling, but a lot slower than exponential scaling. It takes three inputs: <tt>value</tt>, <tt>start</tt> and <tt>power</tt>.
+      <p>Examples:<br>
+      <tt>normSemiexpScaling(1e25,1e5,1)</tt> returns <tt>5e124</tt><br>
+      <tt>normSemiexpScaling(1e25,1e10,2)</tt> returns <tt>5.927598033463074e155</tt></p>
+      <p>At high values, the output of this function is proportional to <tt>start^logₛₜₐᵣₜ(value)^(power+1)</tt>.</p>
       <h1>infSemiexpScaling</h1>
+      <p>This function semi-exponentially scales an infNumber. It takes the same three inputs as normSemiexpScaling.</p>
+      <p>Examples:<br>
+      <tt>infSemiexpScaling(25,5,2)</tt> returns <tt>624.5228787452803</tt><br>
+      <tt>infSemiexpScaling(1e25,1e10,2)</tt> returns <tt>1e55</tt></p>
       <h1>ExponentialScaling</h1>
+      <p>This function exponentially scales a number. It only takes two inputs: <tt>value</tt> and <tt>start</tt>.</p>
+      <p>Examples:<br>
+      <tt>ExponentialScaling(20,10)</tt> returns <tt>27.18281828459045</tt><br>
+      <tt>ExponentialScaling(100,10)</tt> returns <tt>81030.83927575384</tt></p>
+      <p>At high values, the result of this function is proportional to <tt>e^(value/start)</tt></p>
       <h1>SuperexpScaling</h1>
+      <p>Thsi function exponentially scales a number twice. It only takes two inputs: <tt>value</tt> and <tt>start</tt>.</p>
+      <p>Examples:<br>
+      <tt>SuperexpScaling(20,10)</tt> returns <tt>55.7494152476088</tt><br>
+      <tt>SuperexpScaling(69,10)</tt> returns <tt>1.2573711748162102e159</tt><br>
+      <tt>SuperexpScaling(70,10)</tt> returns <tt>5.923854362416098e175</tt></p>
     </div>
     <div class="main" id="Miscellaneous">
       <h1>infFloor</h1>
