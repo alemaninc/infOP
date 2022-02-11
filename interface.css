@@ -44,3 +44,6 @@ body {
 a {
   color: #ffff00
 }
+.languagelinks {
+  column-count: 4
+}
