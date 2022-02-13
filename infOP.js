@@ -87,9 +87,6 @@ function infLinearSoftcap(value,start,power) {
 function LogarithmicSoftcap(value,start,power) {
   return (value<start) ? value : start*(1+Math.log(value/start)*power)**(1/power)
 }
-function ConvergentSoftcap(value,start,end) {
-  return (value<start) ? value : end-(end-start)/(1+(value-start)/(end-start))
-}
 function SuperlogSoftcap(value,start,power) {
   if (value<start) {
     return value
@@ -97,6 +94,9 @@ function SuperlogSoftcap(value,start,power) {
   c=(value/start)**power
   multiplier=(c<Math.exp(1)) ? 1+Math.log(c) : (c<Math.exp(Math.exp(1))) ? 2+Math.log(Math.log(c)) : (c<Math.exp(Math.exp(Math.exp(1)))) ? 3+Math.log(Math.log(Math.log(c))) : 4+Math.log(Math.log(Math.log(Math.log(c))))
   return start*multiplier**(1/power)
+}
+function ConvergentSoftcap(value,start,end) {
+  return (value<start) ? value : end-(end-start)/(1+(value-start)/(end-start))
 }
 function normLinearScaling(value,start,power) {
   return (value<start) ? value : start/(power+1)*(power+(value/start)**(power+1))
@@ -113,8 +113,10 @@ function infSemiexpScaling(value,start,power) {
 function ExponentialScaling(value,start) {
   return (value<start) ? value : start*Math.exp(value/start-1)
 }
-function SuperexpScaling(value,start) {
-  return (value<start) ? value : start*Math.exp(Math.exp(value/start-1)-1)
+function SuperexpScaling(value,start,power) {
+    c=(value/start)**power
+    multiplier=(c<2) ? Math.exp(c-1) : (c<3) ? Math.exp(Math.exp(c-2)) : (c<4) ? Math.exp(Math.exp(Math.exp(c-3))) : Math.exp(Math.exp(Math.exp(Math.exp(c-4))))
+    return start*multiplier**(1/power)
 }
 function divergentScaling(value,start,end) {
   return (value>=end) ? 1e300 : ((value<start) ? value : start+(end-start)*((end-start)/(end-value)-1))
