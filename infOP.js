@@ -116,7 +116,7 @@ function ExponentialScaling(value,start) {
 function SuperexpScaling(value,start,power) {
     c=(value/start)**power
     multiplier=(c<2) ? Math.exp(c-1) : (c<3) ? Math.exp(Math.exp(c-2)) : (c<4) ? Math.exp(Math.exp(Math.exp(c-3))) : Math.exp(Math.exp(Math.exp(Math.exp(c-4))))
-    return start*multiplier**(1/power)
+    return (multiplier=="Infinite" ? start : start*multiplier**(1/power))
 }
 function divergentScaling(value,start,end) {
   return (value>=end) ? 1e300 : ((value<start) ? value : start+(end-start)*((end-start)/(end-value)-1))
