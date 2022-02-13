@@ -99,6 +99,10 @@
       <p>Note: This function has no equivalent for exponents as due to the laws of logarithms it would have the same outputs as this version.</p>
       <h1>SuperlogSoftcap</h1>
       <p>This function <a href="https://en.wikipedia.org/wiki/Super-logarithm">superlogarithmically</a> softcaps a number. It takes three inputs of <tt>value</tt>, <tt>start</tt> and <tt>power</tt>.</p>
+      <p>Examples:<br>
+      <tt>SuperlogSoftcap(1e10,10,1)</tt> returns <tt>41.034383226147</tt><br>
+      <tt>SuperlogSoftcap(1e300,10,1)</tt> returns <tt>46.297238576706725</tt><br>
+      <tt>SuperlogSoftcap(1e156,10,2)</tt> returns <tt>10</tt> (see why below)</p>
       <p>The result of this function is equal to <tt>start*slogₑ((value/start)**(1/power))**power</tt>. As a result, if <tt>value**power</tt> exceeds <tt>1.79e308</tt>, the function will break. This will not cause a <tt>NaN</tt> error and simply return <tt>start</tt> - however, it is recommended to not use this function with a <tt>power</tt> of more than 1.</p>
       <h1>ConvergentSoftcap</h1>
       <p>This function is different from the other softcapping functions. It takes three inputs: <tt>value</tt>, <tt>start</tt> and <tt>end</tt>, structured as <tt>ConvergentSoftcap(value,start,end)</tt>. Once value exceeds start, it will approach but never reach end. Useful for percentage-based upgrades (to never exceed 100%) or sometimes for other purposes.</p>
@@ -137,11 +141,12 @@
       <tt>ExponentialScaling(100,10)</tt> returns <tt>81030.83927575384</tt></p>
       <p>At high values, the result of this function is proportional to <tt>e^(value/start)</tt></p>
       <h1>SuperexpScaling</h1>
-      <p>Thsi function exponentially scales a number twice. It only takes two inputs: <tt>value</tt> and <tt>start</tt>.</p>
+      <p>This function tetrationally scales. It takes three inputs: <tt>value</tt>, <tt>start</tt> and <tt>power</tt>.</p>
       <p>Examples:<br>
-      <tt>SuperexpScaling(20,10)</tt> returns <tt>55.7494152476088</tt><br>
-      <tt>SuperexpScaling(69,10)</tt> returns <tt>1.2573711748162102e159</tt><br>
-      <tt>SuperexpScaling(70,10)</tt> returns <tt>5.923854362416098e175</tt></p>
+      <tt>SuperexpScaling(20,10,1)</tt> returns <tt>27.18281828459045</tt><br>
+      <tt>SuperexpScaling(45,10,1)</tt> returns <tt>5.638772246433441e79</tt><br>
+      <tt>SuperexpScaling(16.5,10,3)</tt> returns <tt>3.577943486327942e25</tt></p>
+      <p>The result of this function is equal to <tt>start*⁽ᵛᵃˡᵘᵉ/ˢᵗᵃʳᵗ⁾^ᵖᵒʷᵉʳe^(1/power)</tt>. As a result, if <tt>value**power</tt> exceeds <tt>1.79e308</tt>, the function will break. This will not cause a <tt>NaN</tt> error and simply return <tt>1.79e308</tt> - however, it is recommended to not use this function with a <tt>power</tt> of more than 1.</p>
     </div>
     <div class="main" id="Miscellaneous">
       <h1>infFloor</h1>
