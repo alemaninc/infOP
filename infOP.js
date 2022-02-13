@@ -1,4 +1,4 @@
-// infOP II, produced by alemaninc
+// infOP III, produced by alemaninc
 function infAdd(x,y) {                 // Adds two infNumbers - for example, infAdd(1,0) returns 1.0414 (log(10+1)) 
   if (Math.abs(x-y)>16) {              // If the quotient of x and y is more than 1e+16, the addition is negligible
     return Math.max(x,y)
