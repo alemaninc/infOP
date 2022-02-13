@@ -93,7 +93,7 @@ function SuperlogSoftcap(value,start,power) {
   }
   c=(value/start)**power
   multiplier=(c<Math.exp(1)) ? 1+Math.log(c) : (c<Math.exp(Math.exp(1))) ? 2+Math.log(Math.log(c)) : (c<Math.exp(Math.exp(Math.exp(1)))) ? 3+Math.log(Math.log(Math.log(c))) : 4+Math.log(Math.log(Math.log(Math.log(c))))
-  return start*multiplier**(1/power)
+  return (multiplier=="Infinity" ? start : start*multiplier**(1/power))
 }
 function ConvergentSoftcap(value,start,end) {
   return (value<start) ? value : end-(end-start)/(1+(value-start)/(end-start))
@@ -116,7 +116,7 @@ function ExponentialScaling(value,start) {
 function SuperexpScaling(value,start,power) {
     c=(value/start)**power
     multiplier=(c<2) ? Math.exp(c-1) : (c<3) ? Math.exp(Math.exp(c-2)) : (c<4) ? Math.exp(Math.exp(Math.exp(c-3))) : Math.exp(Math.exp(Math.exp(Math.exp(c-4))))
-    return (multiplier=="Infinite" ? start : start*multiplier**(1/power))
+    return (multiplier=="Infinity" ? 1.79e308 : start*multiplier**(1/power))
 }
 function divergentScaling(value,start,end) {
   return (value>=end) ? 1e300 : ((value<start) ? value : start+(end-start)*((end-start)/(end-value)-1))
