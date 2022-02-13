@@ -1,5 +1,5 @@
 // infOP II, produced by alemaninc
-function infAdd(x,y) {                 // Adds two exponents - for example, infAdd(1,0) returns 1.0414 (log(10+1)) 
+function infAdd(x,y) {                 // Adds two infNumbers - for example, infAdd(1,0) returns 1.0414 (log(10+1)) 
   if (Math.abs(x-y)>16) {              // If the quotient of x and y is more than 1e+16, the addition is negligible
     return Math.max(x,y)
   } else {
@@ -7,7 +7,7 @@ function infAdd(x,y) {                 // Adds two exponents - for example, infA
     return z+Math.log10(10**(x-z)+10**(y-z))
   }
 }
-function infSubtract(x,y) {            // Subtracts two exponents - if y is greater than x an error message is output. For example, infSubtract(1,0) returns 0.9542 (log(10-1))
+function infSubtract(x,y) {            // Subtracts two infNumbers - if y is greater than x an error message is output. For example, infSubtract(1,0) returns 0.9542 (log(10-1))
   if (x-y>16) {                        // If y is less than 1/1e+16 of x, the subtraction is negligible
     return x
   } else if (x==y) {                   // If x and y are equal, 1/1e+100 is output instead of -Infinite.
@@ -19,19 +19,34 @@ function infSubtract(x,y) {            // Subtracts two exponents - if y is grea
   }
 }
 var notation="Mixed scientific"
-function infFormat(x,y) {                // Formats an exponent as a regular number. For example, infFormat(1.301) returns 20 while infFormat(100.602) returns 4e+100
-  if (x>=33) {
-    return Math.floor(100*10**(x%1))/100+"e"+Math.floor(x)
-  } else if ((x>=3) && (notation=="Mixed scientific")) {
+function infFormat(x,y) {
+  if (x<3) {
+    return (10**x).toFixed(y ? Math.max(0,2-Math.floor(x)) : 0)
+  } else if (notation=="Alemaninc Ordinal") {
+    output="α"+(Math.floor(((x<10) ? 10*x : 100*(1+Math.log(x/10)*0.2)**5)-30).toLocaleString('en-US'))
+    for (i=0; i<output.length; i++) {
+      output = output.replace("0","₀").replace("1","₁").replace("2","₂").replace("3","₃").replace("4","₄").replace("5","₅").replace("6","₆").replace("7","₇").replace("8","₈").replace("9","₉")
+    }
+    return output
+  } else if (notation=="Double Logarithm") {
+    return "ee"+Math.log10(x).toFixed(3)
+  } else if (notation=="Infinity") {
+    return (Math.log(x)/Math.log(1.79e308)).toFixed(6)+"∞"
+  } else if (notation=="Logarithm") {
+    return (x<1e9) ? "e"+(Math.floor((x<100000?100:1)*x)/(x<100000?100:1)).toLocaleString('en-US') : "e"+Math.floor(100*10**(x%1))/100+"e"+Math.floor(Math.log10(x))
+  } else if (notation=="Mixed scientific") {
     const endings=["K","M","B","T","Qa","Qt","Sx","Sp","Oc","No"]
-    return Math.floor(100*10**(x%3))/100+" "+endings[Math.floor(x/3)-1]
-  } else if ((x<1)&&y) {                 // If parameter y is true, 2 decimal digits are displayed if the number is less than 10. If not, the value is always an integer
-    return Math.floor(10**x*100)/100
+    return (x<33) ? (10**(x%3)).toFixed(2)+" "+endings[Math.floor(x/3)-1]                       // 3.5 = 3.16 K
+    : (x<1e9) ? (10**(x%1)).toFixed(2)+"e"+Math.floor(x).toLocaleString("en-US")                // 38462.25 = 1.77e38,462
+    : (x<1e33) ? "e"+(10**(Math.log10(x)%3)).toFixed(2)+" "+endings[Math.floor(Math.log10(x)/3)-1]  // 1.23e21 = e1.23 Sx
+    : "e"+(x/10**Math.floor(Math.log10(x))).toFixed(2)+"e"+Math.floor(Math.log10(x))                   // 2.34e56 = e2.34e56
+  } else if (notation=="Scientific") {
+    return (x<1e9) ? (10**(x%1)).toFixed(2)+"e"+Math.floor(x).toLocaleString("en-US") : "e"+(x/10**Math.floor(Math.log10(x))).toFixed(2)+"e"+Math.floor(Math.log10(x))
   } else {
-    return Math.floor(10**x+0.00001)
+    return "Notation Error!"
   }
 }
-function normFormat(x) {               // Formats a regular number the same way infOperators (exponents) would be formatted
+function normFormat(x) {               // Formats a regular number the same way infNumbers would be formatted
   if (x>=10000) {
     return infFormat(Math.log10(x))
   } else if (x>=100) {
@@ -74,6 +89,14 @@ function LogarithmicSoftcap(value,start,power) {
 }
 function ConvergentSoftcap(value,start,end) {
   return (value<start) ? value : end-(end-start)/(1+(value-start)/(end-start))
+}
+function SuperlogSoftcap(value,start,power) {
+  if (value<start) {
+    return value
+  }
+  c=(value/start)**power
+  multiplier=(c<Math.exp(1)) ? 1+Math.log(c) : (c<Math.exp(Math.exp(1))) ? 2+Math.log(Math.log(c)) : (c<Math.exp(Math.exp(Math.exp(1)))) ? 3+Math.log(Math.log(Math.log(c))) : 4+Math.log(Math.log(Math.log(Math.log(c))))
+  return start*multiplier**(1/power)
 }
 function normLinearScaling(value,start,power) {
   return (value<start) ? value : start/(power+1)*(power+(value/start)**(power+1))
