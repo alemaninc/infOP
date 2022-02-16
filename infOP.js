@@ -96,7 +96,7 @@ function SuperlogSoftcap(value,start,power) {
   return (multiplier=="Infinity" ? start : start*multiplier**(1/power))
 }
 function ConvergentSoftcap(value,start,end) {
-  return (value<start) ? value : end-(end-start)/(1+(value-start)/(end-start))
+  return (Math.sign(value-start)==Math.sign(start-end)) ? value : end-(end-start)/(1+(value-start)/(end-start))
 }
 function normLinearScaling(value,start,power) {
   return (value<start) ? value : start/(power+1)*(power+(value/start)**(power+1))
