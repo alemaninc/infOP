@@ -110,6 +110,10 @@
       <tt>ConvergentSoftcap(80,75,100)</tt> returns <tt>79.16666666666667</tt><br>
       <tt>ConvergentSoftcap(100,50,100)</tt> returns <tt>75</tt><br>
       <tt>ConvergentSoftcap(10000,50,100)</tt> returns <tt>99.75</tt></p>
+      <p>Alternatively, <tt>end</tt> can be less than <tt>start</tt> for the same effect.</p>
+      <p>Examples:<br>
+      <tt>ConvergentSoftcap(2,1,0)</tt> returns <tt>2</tt><br>
+      <tt>ConvergentSoftcap(-0.1,0.5,0)</tt> returns <tt>0.22727272727272727</tt></p>
     </div>
     <div class="main" id="Scalings">
       <h1>normLinearScaling</h1>
@@ -158,7 +162,8 @@
     <div class="main" id="Changelog">
       <h1>infOP III</h1>
       - Added four new infFormat/normFormat notations (Alemaninc Ordinal, Double Logarithm, Logarithm, Infinity)<br>
-      - Made some functions smaller
+      - Made some code smaller<br>
+      - convergentSoftcap now supports <tt>end</tt> being less than <tt>start</tt>
       <h1>infOP II</h1>
       - Added softcap & scaling functions<br>
       - Added changelog<br>
