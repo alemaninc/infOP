@@ -121,4 +121,7 @@ function SuperexpScaling(value,start,power) {
 function divergentScaling(value,start,end) {
   return (value>=end) ? 1e300 : ((value<start) ? value : start+(end-start)*((end-start)/(end-value)-1))
 }
+function infFloor(x) {
+  return (x<0)?-100:(x>16)?x:Math.floor(10**x)
+}
 // End of infOP
