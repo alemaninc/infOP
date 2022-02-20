@@ -56,25 +56,10 @@ function normFormat(x) {               // Formats a regular number the same way 
   }
 }
 function twoDigits(x) {                // Formats a one-digit number as two digits. For example, twoDigits(7) returns 07. Used in timeFormat
-  x=Math.floor(x)
-  if (x<10) {
-    return "0"+x
-  } else {
-    return x
-  }
+  return (x<10) ? "0"+Math.floor(x) : Math.floor(x)
 }
 function timeFormat(x) {               // Formats an amount of seconds as a time. For example, timeFormat(73) returns 1:13 and timeFormat(90123) returns 1 day 1:02:03
-  if (x<10) {
-    return Math.floor(x*1000)/1000+" seconds"
-  } else if (x<60) {
-    return Math.floor(x)+" seconds"
-  } else if (x<3600) {
-    return Math.floor(x/60)+":"+twoDigits(Math.floor(x%60))
-  } else if (x<86400) {
-    return Math.floor(x/3600)+":"+twoDigits(Math.floor(x/60)%60)+":"+twoDigits(Math.floor(x%60))
-  } else {
-    return Math.floor(x/86400)+" days "+Math.floor(x/3600)%24+":"+twoDigits(Math.floor(x/60)%60)+":"+twoDigits(Math.floor(x%60))
-  }
+  return (x<1) ? Math.floor(x*1000)+" milliseconds" : (x<10) ? Math.floor(x*1000)/1000+" seconds" : (x<60) ? Math.floor(x)+" seconds" : (x<3600) ? Math.floor(x/60)+":"+twoDigits(Math.floor(x%60)) : (x<86400) ? Math.floor(x/3600)+":"+twoDigits(Math.floor(x/60)%60)+":"+twoDigits(Math.floor(x%60)) : Math.floor(x/86400)+" days "+Math.floor(x/3600)%24+":"+twoDigits(Math.floor(x/60)%60)+":"+twoDigits(Math.floor(x%60))
 }
 
 // The following code is for Advanced infOP only.
