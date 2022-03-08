@@ -47,3 +47,6 @@ a {
 .languagelinks {
   column-count: 4
 }
+.danger {
+  color: #ff9900
+}
