@@ -1,4 +1,4 @@
-// infOP III, produced by alemaninc
+// infOP IV, produced by alemaninc
 function infAdd(x,y) {                 // Adds two infNumbers - for example, infAdd(1,0) returns 1.0414 (log(10+1)) 
   if (Math.abs(x-y)>16) {              // If the quotient of x and y is more than 1e+16, the addition is negligible
     return Math.max(x,y)
@@ -21,7 +21,7 @@ function infSubtract(x,y) {            // Subtracts two infNumbers - if y is gre
 var notation="Mixed scientific"
 function infFormat(x,y) {
   if (x<3) {
-    return (10**x).toFixed(y ? Math.max(0,2-Math.floor(x)) : 0)
+    return (10**x).toFixed(y ? Math.max(0,Math.min(5,2-Math.floor(x))) : 0)
   } else if (notation=="Alemaninc Ordinal") {
     output="α"+(Math.floor(((x<10) ? 10*x : 100*(1+Math.log(x/10)*0.2)**5)-30).toLocaleString('en-US'))
     for (i=0; i<output.length; i++) {
@@ -30,6 +30,16 @@ function infFormat(x,y) {
     return output
   } else if (notation=="Double Logarithm") {
     return "ee"+Math.log10(x).toFixed(3)
+  } else if (notation=="Engineering") {
+    function preE_length(z) { // funxction to calculate length of Characters in front of floating point
+      return (10 ** (z % 3) - ((10 ** (z % 3) % 1)) % 1).toString().length
+    }
+    var t = Math.log10(x) // t only in use for (x>1e9)
+    return (x < 1e9)
+      ? (10 ** (x % 3)).toFixed((preE_length(x) == 3) ? 1 : (preE_length(x) == 2) ? 2 : 3) // dynamic float
+      + "e" + (x - (x % 3)).toLocaleString("en-US")
+      : "e" + (10 ** (t % 3)).toFixed((preE_length(t) == 3) ? 1 : (preE_length(t) == 2) ? 2 : 3) // dynamic float
+      + "e" + (t - (t % 3)).toLocaleString("en-US");
   } else if (notation=="Infinity") {
     return (Math.log(x)/Math.log(1.79e308)).toFixed(6)+"∞"
   } else if (notation=="Logarithm") {
@@ -95,8 +105,8 @@ function normSemiexpScaling(value,start,power) {
 function infSemiexpScaling(value,start,power) {
   return (value<start) ? value : infAdd(start*(value/start)**(power+1)-Math.log10(power+1),start*(1-1/(power+1)))
 }
-function ExponentialScaling(value,start) {
-  return (value<start) ? value : start*Math.exp(value/start-1)
+function ExponentialScaling(value,start,power) {
+  return (value<start) ? value : start*Math.exp(((value/start)**power-1)/power)
 }
 function SuperexpScaling(value,start,power) {
     c=(value/start)**power
@@ -108,5 +118,8 @@ function divergentScaling(value,start,end) {
 }
 function infFloor(x) {
   return (x<0)?-100:(x>16)?x:Math.floor(10**x)
+}
+function safeExponent(x,y) {
+  return (x==0) ? 0 : (x>0) ? x**y : (x<0) ? -((-x)**y)
 }
 // End of infOP
