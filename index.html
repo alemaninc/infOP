@@ -21,8 +21,9 @@
       <p>infOP is split into Fundamental and Advanced versions. The Fundamental version only includes only the Fundamental Functions and is more compact (as well as being easier to use), whereas the Advanced version includes all functions documented here but is a lot longer.</p>
       <p>In this documentation and function names, the prefix <tt>norm</tt> indicates an ordinary number input (<tt>5</tt> means <tt>5</tt>) and the prefix <tt>inf</tt> indicates an infNumber input (<tt>5</tt> means <tt>100000</tt>)</p>
       <div class="languagelinks">
-        <a href="https://github.com/alemaninc/infOP/blob/main/infOP.js">infOP III JavaScript</a>
+        <a href="https://github.com/alemaninc/infOP/blob/main/infOP.js" class="danger">infOP IV JavaScript</a>
       </div>
+      <p><span class="danger">Orange</span>links are currently being updated and should not be used to update your version of infOP.
     </div>
     <div class="main" id="Fundamental Functions">
       <h1>infAdd</h1>
@@ -158,8 +159,18 @@
       <p>Examples:<br>
       <tt>infFloor(0.5)</tt> returns <tt>0.47712125471966244</tt> (input 3.162, output 3)<br>
       <tt>infFloor(3.1415926)</tt> returns <tt>3.1414497734004674</tt> (input 1385.4555604086302, output 1385)</p>
+      <h1>safeExponent</h1>
+      <p>This function can safely raise a negative number to a power. It takes two inputs of <tt>base</tt> and <tt>exponent</tt>.</p>
+      <p>Examples:</br>
+      <tt>safeExponent(3,4)</tt> returns <tt>81</tt><br>
+      <tt>safeExponent(-3,4)</tt> returns <tt>-81</tt><br>
+      <tt>safeExponent(0,0)</tt> returns <tt>0</tt>
+      <p>This isn't related to infNumbers directly, but can be useful if an infNumber goes below 1 (in which case it is stored as a negative number) and one of your formulas takes the exponent of a logarithm</p>
     </div>
     <div class="main" id="Changelog">
+      <h1>infOP IV</h1>
+      - ExponentialScaling now takes in a <tt>power</tt> input<br>
+      - Added Engineering notation<br>
       <h1>infOP III</h1>
       - Added four new infFormat/normFormat notations (Alemaninc Ordinal, Double Logarithm, Logarithm, Infinity)<br>
       - Made some code smaller<br>
