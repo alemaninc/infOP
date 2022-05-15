@@ -57,10 +57,10 @@ function infFormat(x,y) {
   } else if (notation=="Scientific") {
     return m+((x<1e9) ? (10**(x%1)).toFixed(2)+"e"+Math.floor(x).toLocaleString("en-US") : "e"+(x/10**Math.floor(Math.log10(x))).toFixed(2)+"e"+Math.floor(Math.log10(x)))
   } else if (notation=="Tetration") {
-    output = 0
+    height = 0
     while (x>0.4342944819) {
       x=(Math.log(x*Math.log(10))/Math.log(10))
-      output++
+      height++
     }
     return m+"e ⇈ "+(output+(x*Math.log(10))).toFixed(6)
   } else {
