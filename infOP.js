@@ -20,7 +20,7 @@ function infSubtract(x,y) {            // Subtracts two infNumbers - if y is gre
 }
 var notation="Mixed scientific"
 function infFormat(x,y) {
-  if ((x<3)&&(x>-3)) return (10**x).toFixed(y ? Math.max(0,Math.min(5,2-Math.floor(x))) : 0)
+  if ((x<3)&&(x>-3)) return Math.floor((y ? 10**Math.max(0,Math.min(5,2-Math.floor(x))) : 1)*10**x)/(y ? 10**Math.max(0,Math.min(5,2-Math.floor(x))) : 1)
   else if ((x<-99)&&(x>-101)) return 0
   m=(x>0)?"":"1 / "
   x=Math.abs(x)
