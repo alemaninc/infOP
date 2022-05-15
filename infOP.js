@@ -62,7 +62,7 @@ function infFormat(x,y) {
       x=(Math.log(x*Math.log(10))/Math.log(10))
       height++
     }
-    return m+"e ⇈ "+(output+(x*Math.log(10))).toFixed(6)
+    return m+"e ⇈ "+(height+(x*Math.log(10))).toFixed(6)
   } else {
     return "Notation Error!"
   }
