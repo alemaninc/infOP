@@ -7,12 +7,12 @@ function infAdd(x,y) {                 // Adds two infNumbers - for example, inf
     return z+Math.log10(10**(x-z)+10**(y-z))
   }
 }
-function infSubtract(x,y) {            // Subtracts two infNumbers - if y is greater than x an error message is output. For example, infSubtract(1,0) returns 0.9542 (log(10-1))
+function infSubtract(x,y) {            // Subtracts two infNumbers - if y is greater than x an error message is infoutput. For example, infSubtract(1,0) returns 0.9542 (log(10-1))
   if (x-y>16) {                        // If y is less than 1/1e+16 of x, the subtraction is negligible
     return x
-  } else if (x==y) {                   // If x and y are equal, 1/1e+100 is output instead of -Infinite.
+  } else if (x==y) {                   // If x and y are equal, 1/1e+100 is infoutput instead of -Infinite.
     return -100
-  } else if (y>x) {                    // If a negative value would be output, 0 is output instead as the library can't support negative numbers. However, the game has controls in place to make sure negative values never occur
+  } else if (y>x) {                    // If a negative value would be infoutput, 0 is infoutput instead as the library can't support negative numbers. However, the game has controls in place to make sure negative values never occur
     return 0
   } else {
     return x+Math.log10(1-10**(y-x))
@@ -25,11 +25,11 @@ function infFormat(x,y) {
   m=(x>0)?"":"1 / "
   x=Math.abs(x)
   if (notation=="Alemaninc Ordinal") {
-    output="α"+((x<0)?"₋":"")+(Math.floor(((x<10) ? 10*x : 100*(1+Math.log(x/10)*0.2)**5)-30).toLocaleString('en-US'))
-    for (i=0; i<output.length; i++) {
-      output = output.replace("0","₀").replace("1","₁").replace("2","₂").replace("3","₃").replace("4","₄").replace("5","₅").replace("6","₆").replace("7","₇").replace("8","₈").replace("9","₉")
+    infoutput="α"+((x<0)?"₋":"")+(Math.floor(((x<10) ? 10*x : 100*(1+Math.log(x/10)*0.2)**5)-30).toLocaleString('en-US'))
+    for (i=0; i<infoutput.length; i++) {
+      infoutput = infoutput.replace("0","₀").replace("1","₁").replace("2","₂").replace("3","₃").replace("4","₄").replace("5","₅").replace("6","₆").replace("7","₇").replace("8","₈").replace("9","₉")
     }
-    return m+output
+    return m+infoutput
   } else if (notation=="Double Logarithm") {
     return m+"ee"+Math.log10(x).toFixed(5)
   } else if (notation=="Engineering") {
@@ -44,8 +44,8 @@ function infFormat(x,y) {
       : "e" + (10 ** (x % 3)).toFixed((preE_length(t) == 3) ? 1 : (preE_length(t) == 2) ? 2 : 3) // dynamic float
       + "e" + (t - (t % 3)).toLocaleString("en-US"));
   } else if (notation=="Infinity") {
-    output=Math.log(x)/308.25471555991675
-    return m+(((output>1e6)?((10**(x%1)).toFixed(2)+"e"+Math.floor(x).toLocaleString("en-US")):output.toFixed(6))+"∞")
+    infoutput=Math.log(x)/308.25471555991675
+    return m+(((infoutput>1e6)?((10**(x%1)).toFixed(2)+"e"+Math.floor(x).toLocaleString("en-US")):infoutput.toFixed(6))+"∞")
   } else if (notation=="Logarithm") {
     return m+((x<1e9) ? "e"+(x.toFixed((x>100000)?0:2)).toLocaleString('en-US') : "e"+Math.floor(100*10**(x%1))/100+"e"+Math.floor(Math.log10(x)))
   } else if (notation=="Mixed scientific") {
@@ -57,12 +57,12 @@ function infFormat(x,y) {
   } else if (notation=="Scientific") {
     return m+((x<1e9) ? (10**(x%1)).toFixed(2)+"e"+Math.floor(x).toLocaleString("en-US") : "e"+(x/10**Math.floor(Math.log10(x))).toFixed(2)+"e"+Math.floor(Math.log10(x)))
   } else if (notation=="Tetration") {
-    height = 0
+    infinfoutput = 0
     while (x>0.4342944819) {
       x=(Math.log(x*Math.log(10))/Math.log(10))
-      height++
+      infinfoutput++
     }
-    return m+"e ⇈ "+(height+(x*Math.log(10))).toFixed(6)
+    return m+"e ⇈ "+(infinfoutput+(x*Math.log(10))).toFixed(6)
   } else {
     return "Notation Error!"
   }
