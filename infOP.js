@@ -128,7 +128,7 @@ function divergentScaling(value,start,end) {
   return (value>=end) ? 1e300 : ((value<start) ? value : start+(end-start)*((end-start)/(end-value)-1))
 }
 function infFloor(x) {
-  return (x<0)?-100:(x>16)?x:Math.floor(10**x)
+  return (x<0)?-100:(x>16)?x:Math.log10(Math.floor(10**x))
 }
 function safeExponent(x,y) {
   return Math.sign(x)*Math.abs(x)**y
