@@ -133,4 +133,10 @@ function infFloor(x) {
 function safeExponent(x,y) {
   return Math.sign(x)*Math.abs(x)**y
 }
+function normTriangular(x) {
+  return (x**2+x)/2
+}
+function infTriangular(x) {
+  return (x>16)?x**2-Math.log10(2):Math.log10(normTriangular(10**x))
+}
 // End of infOP
