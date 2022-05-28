@@ -44,7 +44,7 @@ function infFormat(x,y) {
       : "e" + (10 ** (x % 3)).toFixed((preE_length(t) == 3) ? 1 : (preE_length(t) == 2) ? 2 : 3) // dynamic float
       + "e" + (t - (t % 3)).toLocaleString("en-US"));
   } else if (notation=="Infinity") {
-    infoutput=Math.log(x)/308.25471555991675
+    infoutput=Math.log10(x)/308.25471555991675
     return m+(((infoutput>1e6)?((10**(x%1)).toFixed(2)+"e"+Math.floor(x).toLocaleString("en-US")):infoutput.toFixed(6))+"∞")
   } else if (notation=="Logarithm") {
     return m+((x<1e9) ? "e"+(x.toFixed((x>100000)?0:2)).toLocaleString('en-US') : "e"+Math.floor(100*10**(x%1))/100+"e"+Math.floor(Math.log10(x)))
