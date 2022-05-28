@@ -68,12 +68,13 @@ function infFormat(x,y) {
   }
 }
 function normFormat(x) {               // Formats a regular number the same way infNumbers would be formatted
-  if (x>=10000) {
+  if ((x>=10000)||(x<=0.0001)) {
     return infFormat(Math.log10(x))
   } else if (Math.abs(x)>=100) {
     return Math.floor(x)
   } else {
-    return Math.floor(x*100)/100
+    precision=2+Math.max(0,-Math.floor(Math.log10(x)))
+    return x.toFixed(precision)
   }
 }
 function twoDigits(x) {                // Formats a one-digit number as two digits. For example, twoDigits(7) returns 07. Used in timeFormat
