@@ -21,7 +21,7 @@
       <p>infOP is split into Fundamental and Advanced versions. The Fundamental version only includes only the Fundamental Functions and is more compact (as well as being easier to use), whereas the Advanced version includes all functions documented here but is a lot longer.</p>
       <p>In this documentation and function names, the prefix <tt>norm</tt> indicates an ordinary number input (<tt>5</tt> means <tt>5</tt>) and the prefix <tt>inf</tt> indicates an infNumber input (<tt>5</tt> means <tt>100000</tt>)</p>
       <div class="languagelinks">
-        <a href="https://github.com/alemaninc/infOP/blob/main/infOP.js" class="danger">infOP IV JavaScript</a>
+        <a href="https://github.com/alemaninc/infOP/blob/main/infOP.js">infOP V JavaScript</a>
       </div>
       <p><span class="danger">Orange</span>links are currently being updated and should not be used to update your version of infOP.
     </div>
@@ -166,11 +166,23 @@
       <tt>safeExponent(-3,4)</tt> returns <tt>-81</tt><br>
       <tt>safeExponent(0,0)</tt> returns <tt>0</tt>
       <p>This isn't related to infNumbers directly, but can be useful if an infNumber goes below 1 (in which case it is stored as a negative number) and one of your formulas takes the exponent of a logarithm</p>
+      <h1>normSimplex</h1>
+      <p>This is the simplex function for ordinary numbers. <tt>normSimplex(x,y)</tt> calculates the <tt>x</tt>th <tt>y</tt>-simplex number.</p>
+      <p>Examples:<br>
+      <tt>normSimplex(3,2)</tt> returns <tt>6</tt> (3rd triangular number)<br>
+      <tt>normSimplex(5,3)</tt> returns <tt>35</tt> (5th tetrahedral number)<br>
+      <tt>normSimplex(3.5,4)</tt> returns <tt>23.4609375</tt> (3.5th pentatope number)</p>
+      <h1>infSimplex</h1>
+      <p>This is the simplex function for infNumbers. <tt>infSimplex(x,y)</tt> where <tt>x</tt> is an infNumber and <tt>y</tt> is ordinary will output the base 10 logarithm of the <tt>10^x</tt>th <tt>y</tt>-simplex number.</p>
+      <p>Examples:<br>
+      <tt>infSimplex(1,2)</tt> returns <tt>1.7403626894942439</tt> (input 10, output 55)<br>
+      <tt>infSimplex(100,4)</tt> returns <tt>398.61978875828845</tt> (input 1e100, output 4.1667e398)</p>
     </div>
     <div class="main" id="Changelog">
       <h1>infOP V</h1>
       - Added support for very small numbers<br>
       - Added Tetration notation<br>
+      - Added functions for outputting triangular numbers, tetrahedral numbers and higher simplex numbers<br>
       <h1>infOP IV</h1>
       - ExponentialScaling now takes in a <tt>power</tt> input<br>
       - Added Engineering notation<br>
