@@ -133,10 +133,23 @@ function infFloor(x) {
 function safeExponent(x,y) {
   return Math.sign(x)*Math.abs(x)**y
 }
-function normTriangular(x) {
-  return (x**2+x)/2
+function choosei(n,k){
+    var result = 1;
+    for(var i=1; i <= k; i++){
+        result *= (n+1-i)/i;
+    }
+    return result;
 }
-function infTriangular(x) {
-  return (x>16)?x**2-Math.log10(2):Math.log10(normTriangular(10**x))
+function normSimplex(x,y) {
+  return choosei(x+y-1,y)
+}
+function infSimplex(x,y) {
+  if (x<16) {
+    return Math.log10(normSimplex(10**x,y))
+  } else {
+    infOutput=x*y
+    for (i=2;i<=y;i++) infOutput-=Math.log10(i)
+    return infOutput
+  }
 }
 // End of infOP
